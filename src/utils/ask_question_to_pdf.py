@@ -86,10 +86,10 @@ def split_text(text, chunk_size=5000):
 filename = os.path.join(os.path.dirname(__file__), "../../festival.docx")
 length_name = len(filename)
 
-if filename[(length_name - 3):] == "pdf":
+if filename[(length_name - 3) :] == "pdf":
     document = read_pdf(filename)
     print("pdf")
-elif filename[(length_name - 3):] == "txt":
+elif filename[(length_name - 3) :] == "txt":
     document = read_txt(filename)
     print("txt")
 else:
@@ -104,15 +104,16 @@ def gpt3_completion(ppt, doc=document, chatlog=[]):
     print(doc)
 
     client = openai.OpenAI()
-    if (len(chatlog) == 0):
-        chatlog.append({"role": "user", "content": tx1+tx2+doc})
+    if len(chatlog) == 0:
+        chatlog.append({"role": "user", "content": tx1 + tx2 + doc})
     chatlog.append({"role": "user", "content": ppt})
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=chatlog,
     )
-    chatlog.append({"role": "assistant",
-                    'content': response.choices[0].message.content})
+    chatlog.append(
+        {"role": "assistant", "content": response.choices[0].message.content}
+        )
     # messages.append(role, reponse : response.choices[0].message.content)
     # bouton "je vais transmettre un document : modifier message sysyème (doc)
     # en appuyant sur un bouton, on modifie les paramètres du fichier css
@@ -123,12 +124,14 @@ def gpt3_completion(ppt, doc=document, chatlog=[]):
 
 def gpt3_question(chatlog=[], doc=document):
     client = openai.OpenAI()
-    chatlog.append({"role": "system",
-                    "content": "Ask a question about the document"+doc+"now"})
+    chatlog.append(
+        {"role": "system", "content": "Ask a question about the document"+doc+"now"}
+        )
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=chatlog,
     )
-    chatlog.append({"role": "assistant",
-                    'content': response.choices[0].message.content})
+    chatlog.append(
+        {"role": "assistant", "content": response.choices[0].message.content}
+        )
     return response.choices[0].message.content
