@@ -121,10 +121,10 @@ def gpt3_completion(ppt, doc=document, chatlog=[]):
     return response.choices[0].message.content
 
 
-def gpt3_question(chatlog=[]):
+def gpt3_question(chatlog=[], doc=document):
     client = openai.OpenAI()
     chatlog.append({"role": "system",
-                    "content": "Ask a question about the document now"})
+                    "content": "Ask a question about the document"+doc+"now"})
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=chatlog,
