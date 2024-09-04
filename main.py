@@ -22,7 +22,7 @@ def bot_prompt():
     if request.method == "POST":
         response = ask_question_to_pdf.gpt3_completion(
             request.form["prompt"], chatlog=conversation
-            )
+        )
         return {"answer": response}
 
 

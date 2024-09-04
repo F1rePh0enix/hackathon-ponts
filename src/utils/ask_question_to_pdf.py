@@ -113,7 +113,7 @@ def gpt3_completion(ppt, doc=document, chatlog=[]):
     )
     chatlog.append(
         {"role": "assistant", "content": response.choices[0].message.content}
-        )
+    )
     # messages.append(role, reponse : response.choices[0].message.content)
     # bouton "je vais transmettre un document : modifier message sysyème (doc)
     # en appuyant sur un bouton, on modifie les paramètres du fichier css
@@ -126,12 +126,12 @@ def gpt3_question(chatlog=[], doc=document):
     client = openai.OpenAI()
     chatlog.append(
         {"role": "system", "content": "Ask a question about the document"+doc+"now"}
-        )
+    )
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=chatlog,
     )
     chatlog.append(
         {"role": "assistant", "content": response.choices[0].message.content}
-        )
+    )
     return response.choices[0].message.content
