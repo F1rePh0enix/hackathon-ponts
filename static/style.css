@@ -1,10 +1,10 @@
 :root {
-  --body-background-color: #1c53c1;
-  --main-background-color: #951212;
-  --main-color: #2a303b;
+  --body-background-color: #cecece;
+  --main-background-color: #ffffff;
+  --main-color: #311937;
   --max-body-width: 700px;
-  --border-color: #cccccc;
-  --secondary-color: #fff6d3;
+  --border-color: #8418ab;
+  --secondary-color: #f4f4f4;
   --loader-bullet-size: 6px;
 }
 
@@ -12,8 +12,8 @@
   --body-background-color: #07090a;
   --main-background-color: #000000;
   --main-color: #c4d5d4;
-  --border-color: #55eedd;
-  --secondary-color: #fff6d3;
+  --border-color: #000000;
+  --secondary-color: #000000;
 }
 
 * {
@@ -59,23 +59,6 @@ body {
 
 .message-human {
   background-color: var(--secondary-color);
-}
-
-.upload-container {
-  position: fixed;
-  top: 20px;
-  border: 1px solid var(--border-color);
-  background-color: var(--main-background-color);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.upload-input {
-  flex-grow: 1;
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  padding: 5px;
 }
 
 .prompt-container {
