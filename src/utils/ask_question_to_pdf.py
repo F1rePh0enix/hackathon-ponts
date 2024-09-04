@@ -4,6 +4,7 @@ import fitz
 import openai
 from dotenv import load_dotenv
 from nltk.tokenize import sent_tokenize
+from docx import Document
 
 load_dotenv()
 
@@ -45,6 +46,15 @@ def read_txt(filename):
     return data
 
 
+# goal : be able to read a docx
+def read_docx(filename):
+    doc = Document(filename)
+    full_text = []
+    for paragraph in doc.paragraphs:
+        full_text.append(paragraph.text)
+    return "\n".join(full_text)
+
+
 def split_text(text, chunk_size=5000):
     chunks = []
     current_chunk = StringIO()
@@ -73,15 +83,18 @@ def split_text(text, chunk_size=5000):
     return chunks
 
 
-filename = os.path.join(os.path.dirname(__file__), "../../cesar.txt")
+filename = os.path.join(os.path.dirname(__file__), "../../festival.docx")
 length_name = len(filename)
 
 if filename[(length_name - 3):] == "pdf":
     document = read_pdf(filename)
     print("pdf")
-else:
+elif filename[length_name - 3 :] == "txt":
     document = read_txt(filename)
     print("txt")
+else:
+    document = read_docx(filename)
+    print("docx")
 chunks = split_text(document)
 tx1 = "Réponds aux questions en te basant"
 tx2 = "sur le document suivant :"
@@ -89,6 +102,7 @@ tx2 = "sur le document suivant :"
 
 def gpt3_completion(ppt, doc=document, chatlog=[]):
     print(doc)
+
     client = openai.OpenAI()
     if (len(chatlog) == 0):
         chatlog.append({"role": "user", "content": tx1+tx2+doc})
@@ -118,3 +132,4 @@ def gpt3_question(chatlog=[], doc=document):
     chatlog.append({"role": "assistant",
                     'content': response.choices[0].message.content})
     return response.choices[0].message.content
+
