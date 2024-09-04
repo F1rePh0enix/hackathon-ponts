@@ -8,9 +8,11 @@
 </head>
 
 <body>
+
   <button type="checkbox" class="checkbox" id="dark-mode">
     Dark mode
   </button>
+
   <main class="main-container">
     <header class="header">
       <h1 class="header-title">Mon A.I.de mémoire</h1>
@@ -35,10 +37,23 @@
       </button>
     </form>
 
+
+    <form id="upload-form" class="upload-container" enctype="multipart/form-data">
+      <label for="file-upload" class="upload-label">Charger un Document</label>
+
+      <input type="file" id="file-upload" name="file-upload" class="file-input" autocomplete="off"
+        accept=".pdf,.txt,.docx" />
+
+      <button type="submit" class="upload-button" id="upload-button">Envoyer</button>
+
+    </form>
+
     <script src="{{ url_for('static', filename='prompt.js') }}"></script>
   </main>
 </body>
 
+
 </html>
 
 <!-- balise audio html pour mettre le son-->
+
