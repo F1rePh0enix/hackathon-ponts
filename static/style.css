@@ -8,6 +8,14 @@
   --loader-bullet-size: 6px;
 }
 
+.checkbox {
+  --body-background-color: #07090a;
+  --main-background-color: #000000;
+  --main-color: #c4d5d4;
+  --border-color: #55eedd;
+  --secondary-color: #fff6d3;
+}
+
 * {
   box-sizing: border-box;
 }
