@@ -1,6 +1,6 @@
 :root {
-  --body-background-color: #f5f6f8;
-  --main-background-color: #ffffff;
+  --body-background-color: #1c53c1;
+  --main-background-color: #951212;
   --main-color: #2a303b;
   --max-body-width: 700px;
   --border-color: #cccccc;
@@ -59,6 +59,25 @@ body {
 
 .message-human {
   background-color: var(--secondary-color);
+}
+
+.upload-container {
+  position: fixed;
+  top: 20px;
+  border: 1px solid var(--border-color);
+  background-color: var(--main-background-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+
+}
+
+.upload-input {
+  flex-grow: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .prompt-container {

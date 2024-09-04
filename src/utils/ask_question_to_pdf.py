@@ -73,6 +73,7 @@ def split_text(text, chunk_size=5000):
     return chunks
 
 
+
 filename = os.path.join(os.path.dirname(__file__), "../../cesar.txt")
 length_name = len(filename)
 
@@ -89,6 +90,7 @@ tx2 = "sur le document suivant :"
 
 def gpt3_completion(ppt, doc=document, chatlog=[]):
     print(doc)
+
     client = openai.OpenAI()
     if (len(chatlog) == 0):
         chatlog.append({"role": "user", "content": tx1+tx2+doc})
@@ -118,3 +120,4 @@ def gpt3_question(chatlog=[]):
     chatlog.append({"role": "assistant",
                     'content': response.choices[0].message.content})
     return response.choices[0].message.content
+

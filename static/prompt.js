@@ -2,6 +2,8 @@ const promptForm = document.getElementById("prompt-form");
 const submitButton = document.getElementById("submit-button");
 const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
+const uploadForm = document.getElementById('upload-form');
+const uploadStatus = document.getElementById('upload-status');
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -71,3 +73,35 @@ const handleQuestionClick = async (event) => {
 };
 
 questionButton.addEventListener("click", handleQuestionClick);
+
+
+
+uploadForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const formData = new FormData(uploadForm);
+  const fileInput = document.getElementById('file-upload');
+  const file = fileInput.files[0];
+
+  // Vérifier si le fichier est de type PDF, TXT ou DOCX
+  const allowedTypes = ['application/pdf', 'text/plain', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+  if (file && allowedTypes.includes(file.type)) {
+    try {
+      const response = await fetch('/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        uploadStatus.innerText = 'Fichier téléchargé avec succès !';
+      } else {
+        uploadStatus.innerText = 'Échec du téléchargement du fichier.';
+      }
+    } catch (error) {
+      uploadStatus.innerText = 'Une erreur est survenue lors du téléchargement.';
+    }
+  } else {
+    uploadStatus.innerText = 'Veuillez sélectionner un fichier PDF, TXT ou DOCX.';
+  }
+});
+
