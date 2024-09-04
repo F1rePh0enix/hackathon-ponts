@@ -75,7 +75,8 @@ def split_text(text, chunk_size=5000):
 
 filename = os.path.join(os.path.dirname(__file__), "../../cesar.txt")
 length_name = len(filename)
-if filename[length_name - 3 :] == "pdf":
+
+if filename[(length_name - 3):] == "pdf":
     document = read_pdf(filename)
     print("pdf")
 else:
@@ -86,22 +87,34 @@ tx1 = "Réponds aux questions en te basant"
 tx2 = "sur le document suivant :"
 
 
-def gpt3_completion(ppt, doc=document):
+def gpt3_completion(ppt, doc=document, chatlog=[]):
     print(doc)
     client = openai.OpenAI()
+    if (len(chatlog) == 0):
+        chatlog.append({"role": "user", "content": tx1+tx2+doc})
+    chatlog.append({"role": "user", "content": ppt})
     response = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[
-            {
-                "role": "system",
-                "content": tx1 + tx2 + doc,
-            },
-            {"role": "user", "content": ppt},
-        ],
+        messages=chatlog,
     )
+    chatlog.append({"role": "assistant",
+                    'content': response.choices[0].message.content})
     # messages.append(role, reponse : response.choices[0].message.content)
     # bouton "je vais transmettre un document : modifier message sysyème (doc)
     # en appuyant sur un bouton, on modifie les paramètres du fichier css
     # les boutons sont à déclarer dans html
     print(response)
+    return response.choices[0].message.content
+
+
+def gpt3_question(chatlog=[]):
+    client = openai.OpenAI()
+    chatlog.append({"role": "system",
+                    "content": "Ask a question about the document now"})
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=chatlog,
+    )
+    chatlog.append({"role": "assistant",
+                    'content': response.choices[0].message.content})
     return response.choices[0].message.content
