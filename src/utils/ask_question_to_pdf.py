@@ -86,13 +86,14 @@ def split_text(text, chunk_size=5000):
 filename = os.path.join(os.path.dirname(__file__), "../../festival.docx")
 length_name = len(filename)
 
-if filename[(length_name - 3) :] == "pdf":
+# fmt:off
+if filename[(length_name - 3):] == "pdf":
     document = read_pdf(filename)
     print("pdf")
-elif filename[(length_name - 3) :] == "txt":
+elif filename[(length_name - 3):] == "txt":
     document = read_txt(filename)
     print("txt")
-else:
+else:  # fmt:on
     document = read_docx(filename)
     print("docx")
 chunks = split_text(document)
@@ -124,9 +125,10 @@ def gpt3_completion(ppt, doc=document, chatlog=[]):
 
 def gpt3_question(chatlog=[], doc=document):
     client = openai.OpenAI()
-    chatlog.append(
-        {"role": "system", "content": "Ask a question about the document" + doc + "now"}
-    )
+    chatlog.append(  # fmt:off
+        {"role": "system",
+         "content": "Ask a question about the document" + doc + "now"}
+    )  # fmt:on
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=chatlog,
