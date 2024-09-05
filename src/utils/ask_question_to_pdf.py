@@ -97,8 +97,8 @@ else:  # fmt:on
     document = read_docx(filename)
     print("docx")
 chunks = split_text(document)
-tx1 = "Réponds aux questions en te basant"
-tx2 = "sur le document suivant :"
+tx1 = "Réponds aux questions"
+tx2 = " en te basant sur le document suivant :"
 
 
 def gpt3_completion(ppt, doc=document, chatlog=[]):
@@ -141,9 +141,9 @@ def gpt3_question(chatlog=[], doc=document):
 def gpt3_correct(ppt, chatlog=[], doc=document):
     client = openai.OpenAI()
     chatlog.append(
-        {"role": "system", "content": "Verify the answer with the document" + doc},
-        {"role": "user", "content": ppt}
+        {"role": "system", "content": "Vérifie si la réponse est vraie ou fausse," + tx2 + doc}
     )
+    chatlog.append({"role": "user", "content": ppt})
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=chatlog,

@@ -33,7 +33,8 @@ def bot_submit():
         return {"answer": response}
 
 
-def check_response():
+@app.route("/answer", methods=["POST"])
+def bot_answer():
     if request.method == "POST":
         response = ask_question_to_pdf.gpt3_correct(
             request.form["prompt"], chatlog=conversation
