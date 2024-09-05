@@ -103,10 +103,9 @@ tx2 = "sur le document suivant :"
 
 def gpt3_completion(ppt, doc=document, chatlog=[]):
     print(doc)
-
     client = openai.OpenAI()
-    if len(chatlog) == 0:
-        chatlog.append({"role": "user", "content": tx1 + tx2 + doc})
+
+    chatlog.append({"role": "user", "content": tx1 + tx2 + doc})
     chatlog.append({"role": "user", "content": ppt})
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -129,6 +128,22 @@ def gpt3_question(chatlog=[], doc=document):
         {"role": "system",
          "content": "Ask a question about the document" + doc + "now"}
     )  # fmt:on
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=chatlog,
+    )
+    chatlog.append(
+        {"role": "assistant", "content": response.choices[0].message.content}
+    )
+    return response.choices[0].message.content
+
+
+def gpt3_correct(ppt, chatlog=[], doc=document):
+    client = openai.OpenAI()
+    chatlog.append(
+        {"role": "system", "content": "Verify the answer with the document" + doc},
+        {"role": "user", "content": ppt}
+    )
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=chatlog,
