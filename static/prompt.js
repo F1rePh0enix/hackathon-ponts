@@ -6,8 +6,8 @@ const uploadForm = document.getElementById('upload-form');
 const uploadStatus = document.getElementById('upload-status');
 const bodyTheme = document.getElementById('body');
 const DMButton = document.getElementById('dark-mode');
-
-
+const audio = document.getElementById('audio-player');
+audio.volume = 0.8;
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -34,6 +34,7 @@ const appendAIMessage = async (messagePromise) => {
 
 
 const handlePrompt = async (event) => {
+  audio.play()
   event.preventDefault();
   // Parse form data in a structured object
   const data = new FormData(event.target);
@@ -63,6 +64,7 @@ const handlePrompt = async (event) => {
 promptForm.addEventListener("submit", handlePrompt);
 
 const handleQuestionClick = async (event) => {
+  audio.play()
   appendAIMessage(async () => {
     const response = await fetch("/question", {
       method: "GET",
@@ -81,6 +83,7 @@ questionButton.addEventListener("click", handleQuestionClick);
 
 
 const HandleDarkModeClick = async (event) =>{
+  audio.play()
   console.log('DM button pressed');
   let url = "/dark";
   if (bodyTheme.classList.contains("lightmode")){
@@ -98,6 +101,7 @@ DMButton.addEventListener("click", HandleDarkModeClick);
 
 
 uploadForm.addEventListener('submit', async (event) => {
+  audio.play()
   event.preventDefault();
 
   const formData = new FormData(uploadForm);
@@ -125,3 +129,6 @@ uploadForm.addEventListener('submit', async (event) => {
     uploadStatus.innerText = 'Veuillez sélectionner un fichier PDF, TXT ou DOCX.';
   }
 });
+
+
+audio.play();
