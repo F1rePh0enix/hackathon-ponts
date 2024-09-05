@@ -63,7 +63,6 @@ const handlePrompt = async (event) => {
 promptForm.addEventListener("submit", handlePrompt);
 
 const handleQuestionClick = async (event) => {
-  console.log('question button pressed');
   appendAIMessage(async () => {
     const response = await fetch("/question", {
       method: "GET",
@@ -85,12 +84,10 @@ const HandleDarkModeClick = async (event) =>{
   console.log('DM button pressed');
   let url = "/dark";
   if (bodyTheme.classList.contains("lightmode")){
-    console.log("lightmode");
     bodyTheme.classList.remove("lightmode");
     bodyTheme.classList.add("darkmode");
   }
   else{
-    console.log("darkmode");
     bodyTheme.classList.remove("darkmode");
     bodyTheme.classList.add("lightmode");
   }

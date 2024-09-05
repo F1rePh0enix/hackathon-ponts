@@ -67,9 +67,17 @@ body {
 
 
 .dark-mode {
+  position: fixed;
   border: 1px solid var(--border-col);
   background-color: var(--secondary-col);
   color: var(--main-color);
+}
+
+.audio-player{
+  position: fixed;
+  bottom: 0px;
+  right: 25px;
+  border: 1px solid var(--border-col);
 }
 
 .message-human {
