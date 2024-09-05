@@ -21,7 +21,7 @@ def home():
 def bot_prompt():
     if request.method == "POST":
         response = ask_question_to_pdf.gpt3_completion(
-            request.form["prompt"], chatlog=conversation
+            request.form["prompt"], ask_question_to_pdf.document, conversation
         )
         return {"answer": response}
 
@@ -29,7 +29,9 @@ def bot_prompt():
 @app.route("/question", methods=["GET", "POST"])
 def bot_submit():
     if request.method == "GET":
-        response = ask_question_to_pdf.gpt3_question(chatlog=conversation)
+        response = ask_question_to_pdf.gpt3_question(
+            ask_question_to_pdf.document, conversation
+        )
         return {"answer": response}
 
 
@@ -37,7 +39,7 @@ def bot_submit():
 def bot_answer():
     if request.method == "POST":
         response = ask_question_to_pdf.gpt3_correct(
-            request.form["prompt"], chatlog=conversation
+            request.form["prompt"], ask_question_to_pdf.document, conversation
         )
         return {"answer": response}
 
@@ -55,7 +57,7 @@ def upload_file():
             )  # ce sera pour quand on en aura plusieurs à la fois lol
             file.save(file_path)
             ask_question_to_pdf.filename = file_path
-            ask_question_to_pdf.document = ask_question_to_pdf.read_pdf(
+            ask_question_to_pdf.document = ask_question_to_pdf.read_doc(
                 ask_question_to_pdf.filename
             )
             ask_question_to_pdf.chunks = ask_question_to_pdf.split_text(
