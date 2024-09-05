@@ -4,6 +4,10 @@ const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
 const uploadForm = document.getElementById('upload-form');
 const uploadStatus = document.getElementById('upload-status');
+const bodyTheme = document.getElementById('body');
+const DMButton = document.getElementById('dark-mode');
+
+
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -27,6 +31,7 @@ const appendAIMessage = async (messagePromise) => {
   loaderElement.classList.remove("loader");
   loaderElement.innerHTML = messageToAppend;
 };
+
 
 const handlePrompt = async (event) => {
   event.preventDefault();
@@ -58,6 +63,7 @@ const handlePrompt = async (event) => {
 promptForm.addEventListener("submit", handlePrompt);
 
 const handleQuestionClick = async (event) => {
+  console.log('question button pressed');
   appendAIMessage(async () => {
     const response = await fetch("/question", {
       method: "GET",
@@ -74,6 +80,24 @@ const handleQuestionClick = async (event) => {
 
 questionButton.addEventListener("click", handleQuestionClick);
 
+
+const HandleDarkModeClick = async (event) =>{
+  console.log('DM button pressed');
+  let url = "/dark";
+  if (bodyTheme.classList.contains("lightmode")){
+    console.log("lightmode");
+    bodyTheme.classList.remove("lightmode");
+    bodyTheme.classList.add("darkmode");
+  }
+  else{
+    console.log("darkmode");
+    bodyTheme.classList.remove("darkmode");
+    bodyTheme.classList.add("lightmode");
+  }
+};
+
+
+DMButton.addEventListener("click", HandleDarkModeClick);
 
 
 uploadForm.addEventListener('submit', async (event) => {
@@ -104,4 +128,3 @@ uploadForm.addEventListener('submit', async (event) => {
     uploadStatus.innerText = 'Veuillez sélectionner un fichier PDF, TXT ou DOCX.';
   }
 });
-
