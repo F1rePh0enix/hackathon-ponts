@@ -73,3 +73,24 @@ def allowed_file(filename):
         "txt",
         "docx",
     }
+
+
+@app.route("/charger", methods=["POST"])
+def charger():
+    data = request.get_json()
+    selected_value = data.get("document")
+    num_doc = int(selected_value) - 1
+    print(num_doc)
+    if selected_value != "" and ask_question_to_pdf.content_downloads[num_doc] != "":
+        file_path = os.path.join(
+            "downloads/" + ask_question_to_pdf.content_downloads[num_doc]
+        )
+        ask_question_to_pdf.filename = file_path
+        ask_question_to_pdf.document = ask_question_to_pdf.read_doc(
+            ask_question_to_pdf.filename
+        )
+        ask_question_to_pdf.chunks = ask_question_to_pdf.split_text(
+            ask_question_to_pdf.document
+        )
+
+    return "ok"

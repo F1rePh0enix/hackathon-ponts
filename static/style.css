@@ -27,6 +27,84 @@ body {
   font-family: sans-serif;
 }
 
+.left-container {
+  display: block;
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  width: 470px;
+  min-height: 100vh;
+  background: rgb(61, 61, 61);
+  display: flex;
+  text-align: center;
+}
+
+.upload-container {
+  position: fixed;
+  top: 20px;
+  /*margin: 5px;*/
+  border: 1px solid black;
+  background-color: orange;
+  padding: 5px;
+  display: flex;
+  align-self: center;
+  gap: 100px;
+}
+
+.upload-input {
+  flex-grow: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.upload-button:hover,
+.upload-button:active {
+  background-color: var(--body-background-color);
+  cursor: pointer;
+}
+
+.menu-depliant {
+  position: relative;
+  top: 50px;
+  width: auto;
+  height: auto;
+  border: 1px solid black;
+  background-color: orange;
+  padding: 5px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.charger-doc {
+  border: 1px solid black;
+  background-color: rgb(59, 27, 168);
+  width: auto;
+  height: auto;
+  padding: 5px;
+  display: inline-block;
+}
+
+.container {
+  position: relative;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.upload-status {
+  margin-top: 10px;
+  color: red;
+}
+
+.checkbox {
+  position: fixed;
+  bottom: 0px;
+  background-color: #8418ab;
+  align-self: center;
+
+}
+
 .main-container {
   max-width: var(--max-body-width);
   min-height: 100vh;
@@ -41,7 +119,7 @@ body {
 }
 
 .header-title {
-  margin-top: 0;
+  margin-top: 100;
 }
 
 .messages-container {
@@ -61,22 +139,6 @@ body {
   background-color: var(--secondary-color);
 }
 
-.upload-container {
-  position: fixed;
-  top: 20px;
-  border: 1px solid var(--border-color);
-  background-color: var(--main-background-color);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.upload-input {
-  flex-grow: 1;
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  padding: 5px;
-}
 
 .prompt-container {
   position: fixed;
