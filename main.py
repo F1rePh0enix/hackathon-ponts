@@ -26,10 +26,19 @@ def bot_prompt():
         return {"answer": response}
 
 
-@app.route("/question", methods=["GET"])
+@app.route("/question", methods=["GET", "POST"])
 def bot_submit():
     if request.method == "GET":
         response = ask_question_to_pdf.gpt3_question(chatlog=conversation)
+        return {"answer": response}
+
+
+@app.route("/answer", methods=["POST"])
+def bot_answer():
+    if request.method == "POST":
+        response = ask_question_to_pdf.gpt3_correct(
+            request.form["prompt"], chatlog=conversation
+        )
         return {"answer": response}
 
 
