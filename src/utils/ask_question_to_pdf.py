@@ -83,20 +83,27 @@ def split_text(text, chunk_size=5000):
     return chunks
 
 
-filename = os.path.join(os.path.dirname(__file__), "../../festival.docx")
-length_name = len(filename)
+def read_doc(filename):
+    length_name = len(filename)
+    if filename[(length_name - 3) :] == "pdf":
+        document = read_pdf(filename)
+        print("pdf")
 
-# fmt:off
-if filename[(length_name - 3):] == "pdf":
-    document = read_pdf(filename)
-    print("pdf")
-elif filename[(length_name - 3):] == "txt":
-    document = read_txt(filename)
-    print("txt")
-else:  # fmt:on
-    document = read_docx(filename)
-    print("docx")
+    elif filename[(length_name - 3) :] == "txt":
+        document = read_txt(filename)
+        print("txt")
+
+    else:
+        document = read_docx(filename)
+        print("docx")
+
+    return document
+
+
+filename = os.path.join(os.path.dirname(__file__), "../../festival.docx")
+document = read_doc(filename)
 chunks = split_text(document)
+
 tx1 = "Réponds aux questions"
 tx2 = " en te basant sur le document suivant :"
 
@@ -105,7 +112,7 @@ def gpt3_completion(ppt, doc=document, chatlog=[]):
     print(doc)
     client = openai.OpenAI()
 
-    chatlog.append({"role": "user", "content": tx1 + tx2 + doc})
+    chatlog.append({"role": "system", "content": tx1 + tx2 + doc})
     chatlog.append({"role": "user", "content": ppt})
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -122,11 +129,10 @@ def gpt3_completion(ppt, doc=document, chatlog=[]):
     return response.choices[0].message.content
 
 
-def gpt3_question(chatlog=[], doc=document):
+def gpt3_question(doc=document, chatlog=[]):
     client = openai.OpenAI()
     chatlog.append(  # fmt:off
-        {"role": "system",
-         "content": "Ask a question about the document" + doc + "now"}
+        {"role": "system", "content": "Ask a question about the document" + doc + "now"}
     )  # fmt:on
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -138,10 +144,13 @@ def gpt3_question(chatlog=[], doc=document):
     return response.choices[0].message.content
 
 
-def gpt3_correct(ppt, chatlog=[], doc=document):
+def gpt3_correct(ppt, doc=document, chatlog=[]):
     client = openai.OpenAI()
     chatlog.append(
-        {"role": "system", "content": "Vérifie si la réponse est vraie ou fausse," + tx2 + doc}
+        {
+            "role": "system",
+            "content": "Vérifie si la réponse est vraie ou fausse," + tx2 + doc,
+        }
     )
     chatlog.append({"role": "user", "content": ppt})
     response = client.chat.completions.create(
