@@ -4,6 +4,7 @@ from flask import request
 from src.utils import ask_question_to_pdf
 import os
 
+
 app = Flask(__name__)
 conversation = []
 
@@ -53,9 +54,13 @@ def upload_file():
 
             # Sauvegarder le fichier
             file_path = os.path.join(
-                "downloads/" + filename
-            )  # ce sera pour quand on en aura plusieurs à la fois lol
+                "downloads/" + str(ask_question_to_pdf.num_doc) + filename
+            )
+            ask_question_to_pdf.space_downloads()
             file.save(file_path)
+            ask_question_to_pdf.maj_downloads()
+
+            ask_question_to_pdf.num_doc = rotation(ask_question_to_pdf.num_doc)
             ask_question_to_pdf.filename = file_path
             ask_question_to_pdf.document = ask_question_to_pdf.read_doc(
                 ask_question_to_pdf.filename
@@ -64,7 +69,7 @@ def upload_file():
                 ask_question_to_pdf.document
             )
 
-            return "ok"
+            return {"filename": filename}
 
 
 def allowed_file(filename):
@@ -73,6 +78,11 @@ def allowed_file(filename):
         "txt",
         "docx",
     }
+
+
+def suppr_download(filename):
+    # os.chmod("downloads/" + filename, stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)
+    os.remove(os.path.join(os.path.dirname(__file__), "downloads", filename))
 
 
 @app.route("/charger", methods=["POST"])
@@ -93,4 +103,19 @@ def charger():
             ask_question_to_pdf.document
         )
 
+    return "ok"
+
+
+def rotation(i):
+    if i == 5:
+        return 1
+    else:
+        return i + 1
+
+
+@app.route("/reset", methods=["POST"])
+def reset():
+    print("bbbbbbbbbbbbb")
+    ask_question_to_pdf.content_downloads = ask_question_to_pdf.vider_downloads()
+    ask_question_to_pdf.num_doc = 1
     return "ok"

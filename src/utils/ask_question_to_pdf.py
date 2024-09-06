@@ -5,8 +5,11 @@ import openai
 from dotenv import load_dotenv
 from nltk.tokenize import sent_tokenize
 from docx import Document
+import stat
 
 load_dotenv()
+
+num_doc = 1
 
 
 def open_file(filepath):
@@ -164,28 +167,35 @@ def gpt3_correct(ppt, doc=document, chatlog=[]):
 
 
 def suppr_download(filename):
-    os.remove("downloads/" + filename)
+    # os.chmod("downloads/" + filename, stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)
+    os.remove(os.path.join(os.path.dirname(__file__), "../../downloads", filename))
 
 
 def vider_downloads():
+    print("aaaaaaaaaaaaaaaaaaaaaa")
     for filename in os.listdir("downloads"):
         length_name = len(filename)
-        if filename[(length_name - 3) :] in ["pdf", "txt", "docx"]:
+        if filename[(length_name - 4) :] in [".pdf", ".txt", "docx"]:
             suppr_download(filename)
 
     return ["", "", "", "", ""]
 
 
-def add_downloads(filename):
+def space_downloads():
     content = os.listdir("downloads")
     content.remove("image.jpg")
     if len(content) >= 5:
-        a_suppr = content.pop(0)
+        a_suppr = content.pop(num_doc - 1)
         suppr_download(a_suppr)
 
-    content.append(filename)
+
+def maj_downloads():
+    content = os.listdir("downloads")
+    content.remove("image.jpg")
     while len(content_downloads) < 5:
         content.append("")
+
+    print(content)
 
 
 content_downloads = os.listdir("downloads")
