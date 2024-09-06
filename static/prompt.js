@@ -8,6 +8,7 @@ const chargerDoc = document.getElementById('charger-doc')
 const bodyTheme = document.getElementById('body');
 const DMButton = document.getElementById('dark-mode');
 const audio = document.getElementById('audio-player');
+const resetButton = document.getElementById('reset-button')
 audio.volume = 0.8;
 
 const appendHumanMessage = (message) => {
@@ -83,23 +84,43 @@ const handleQuestionClick = async (event) => {
 questionButton.addEventListener("click", handleQuestionClick);
 
 
-const HandleDarkModeClick = async (event) =>{
+const HandleDarkModeClick = async (event) => {
   audio.play()
   console.log('DM button pressed');
   let url = "/dark";
-  if (bodyTheme.classList.contains("lightmode")){
+  if (bodyTheme.classList.contains("lightmode")) {
     bodyTheme.classList.remove("lightmode");
     bodyTheme.classList.add("darkmode");
   }
-  else{
+  else {
     bodyTheme.classList.remove("darkmode");
     bodyTheme.classList.add("lightmode");
   }
 };
 
-
 DMButton.addEventListener("click", HandleDarkModeClick);
 
+
+const HandleResetClick = async (event) => {
+  audio.play()
+  console.log('reset button pressed');
+  try {
+    const response = await fetch("/reset", {
+      method: 'POST',
+      body: "",
+    });
+
+    if (response.ok) {
+      console.log('Reset successful');
+    } else {
+      console.log('Reset failed');
+    }
+  } catch (error) {
+    console.error('Error during reset:', error);
+  }
+};
+
+resetButton.addEventListener("click", HandleResetClick);
 
 uploadForm.addEventListener('submit', async (event) => {
   audio.play()
@@ -117,6 +138,9 @@ uploadForm.addEventListener('submit', async (event) => {
         method: 'POST',
         body: formData,
       });
+
+      const result = await response.json()
+      console.log(result)
 
       if (response.ok) {
 
@@ -158,6 +182,9 @@ const handleChargerClick = async (event) => {
       },
       body: JSON.stringify({ document: selectedValue })
     });
+
+    const result = await response.json()
+    console.log(result)
 
     if (response.ok) {
       document.getElementById('upload-status').innerText = 'Fichier téléchargé avec succès !';

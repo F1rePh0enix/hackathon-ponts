@@ -126,6 +126,21 @@ body {
   height: auto;
 }
 
+.reset-container {
+  position: fixed;
+  top: 75%;
+}
+
+.reset-button {
+  position: fixed;
+  bottom: 100px;
+  border: 1px solid var(--border-col);
+  background-color: pink;
+  color: pink;
+  width: auto;
+  height: auto;
+}
+
 .main-container {
   max-width: var(--max-body-width);
   min-height: 100vh;
