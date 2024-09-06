@@ -40,21 +40,23 @@ body {
 }
 
 .left-container {
-  display: block;
+  flex: 1;
+  display: flex;
   position: fixed;
   left: 0%;
   top: 0%;
-  width: 25.7%;
+  /*width: 15%;*/
   min-height: 100vh;
   background: var(--left-background-col);
-  display: flex;
   text-align: center;
 }
 
 .upload-container {
   position: fixed;
-  top: 1px;
-  /*margin: 5px;*/
+  position: fixed;
+  top: 50px;
+  left: 10px;
+  margin: 5px;
   border: 1px solid black;
   background-color: var(--border-col);
   padding: 5px;
