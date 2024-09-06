@@ -50,7 +50,7 @@ body {
   position: fixed;
   position: fixed;
   top: 50px;
-  left: 10px;
+  left: 5px;
   margin: 5px;
   border: 1px solid black;
   background-color: var(--border-col);
@@ -90,9 +90,9 @@ body {
 }
 
 .charger-doc {
-  position: relative;
+  position: fixed;
   top: 70px;
-  left: 200px;
+  left: 210px;
   border: 1px solid black;
   background-color: var(--border-col);
   width: auto;
@@ -109,13 +109,16 @@ body {
 }
 
 .upload-status {
+  position: fixed;
+  top: 60%;
   margin-top: 10px;
-  color: red;
+  color: rgb(33, 20, 64);
 }
 
 .dark-container {
   position: fixed;
-  bottom: 0px;
+  bottom: 10px;
+  left: 10px;
 }
 
 .dark-mode {
@@ -129,6 +132,7 @@ body {
 .reset-container {
   position: fixed;
   top: 75%;
+  left: 10px;
 }
 
 .reset-button {

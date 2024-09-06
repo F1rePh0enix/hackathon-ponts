@@ -58,7 +58,7 @@ def upload_file():
             )
             ask_question_to_pdf.space_downloads()
             file.save(file_path)
-            ask_question_to_pdf.maj_downloads()
+            ask_question_to_pdf.content_downloads = ask_question_to_pdf.maj_downloads()
 
             ask_question_to_pdf.num_doc = rotation(ask_question_to_pdf.num_doc)
             ask_question_to_pdf.filename = file_path

@@ -183,16 +183,14 @@ const handleChargerClick = async (event) => {
       body: JSON.stringify({ document: selectedValue })
     });
 
-    const result = await response.json()
-    console.log(result)
 
     if (response.ok) {
-      document.getElementById('upload-status').innerText = 'Fichier téléchargé avec succès !';
+      document.getElementById('upload-status').innerText = 'Fichier chargé avec succès !';
     } else {
-      document.getElementById('upload-status').innerText = 'Échec du téléchargement du fichier.';
+      document.getElementById('upload-status').innerText = 'Échec du chargement du fichier.';
     }
   } catch (error) {
-    document.getElementById('upload-status').innerText = 'Une erreur est survenue lors du téléchargement.';
+    document.getElementById('upload-status').innerText = 'Une erreur est survenue lors du chargement.';
   }
 };
 
