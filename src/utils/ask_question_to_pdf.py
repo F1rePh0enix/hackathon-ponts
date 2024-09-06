@@ -109,7 +109,7 @@ tx2 = " en te basant sur le document suivant :"
 
 
 def gpt3_completion(ppt, doc=document, chatlog=[]):
-    print(doc)
+    # print(doc)
     client = openai.OpenAI()
 
     chatlog.append({"role": "system", "content": tx1 + tx2 + doc})
@@ -179,14 +179,13 @@ def vider_downloads():
 def add_downloads(filename):
     content = os.listdir("downloads")
     content.remove("image.jpg")
+    if len(content) >= 5:
+        a_suppr = content.pop(0)
+        suppr_download(a_suppr)
+
+    content.append(filename)
     while len(content_downloads) < 5:
         content.append("")
-    a_suppr = content.pop(4)
-    if a_suppr != "":
-        suppr_download(a_suppr)
-    content.append(filename)
-
-    return content
 
 
 content_downloads = os.listdir("downloads")
