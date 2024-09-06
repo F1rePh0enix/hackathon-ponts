@@ -192,10 +192,11 @@ def space_downloads():
 def maj_downloads():
     content = os.listdir("downloads")
     content.remove("image.jpg")
-    while len(content_downloads) < 5:
+    while len(content) < 5:
         content.append("")
 
     print(content)
+    return content
 
 
 content_downloads = os.listdir("downloads")
