@@ -20,7 +20,7 @@
   --main-col: #311937;
   --border-col: #8418ab;
   --secondary-col: #f4f4f4;
-  --menu-col: #00fff7;
+  --menu-col: #e35f00;
 }
 
 * {
@@ -166,7 +166,7 @@ body {
   color: var(--main-col);
 }
 
-.audio-player{
+.audio-player {
   position: fixed;
   bottom: 0px;
   right: 25px;
