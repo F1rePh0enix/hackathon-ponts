@@ -80,8 +80,8 @@ body {
 }
 
 .menu-depliant {
-  position: relative;
-  top: 50px;
+  position: fixed;
+  top: 70px;
   width: auto;
   height: auto;
   border: 1px solid black;
@@ -93,6 +93,9 @@ body {
 }
 
 .charger-doc {
+  position: relative;
+  top: 70px;
+  left: 200px;
   border: 1px solid black;
   background-color: var(--border-col);
   width: auto;
@@ -102,11 +105,10 @@ body {
   color: var(--main-background-col);
 }
 
-.container {
-  position: relative;
+.menu-container {
+  position: fixed;
   top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 10px;
 }
 
 .upload-status {
@@ -114,12 +116,19 @@ body {
   color: red;
 }
 
-.checkbox {
+.dark-container {
   position: fixed;
   bottom: 0px;
-  background-color: #8418ab;
-  align-self: center;
+}
 
+.dark-mode {
+  position: fixed;
+  bottom: 0px;
+  border: 1px solid var(--border-col);
+  background-color: var(--secondary-col);
+  color: var(--main-color);
+  width: auto;
+  height: auto;
 }
 
 .main-container {

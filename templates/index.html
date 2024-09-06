@@ -6,20 +6,27 @@
 
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 
-  <audio id="audio-player" class="audio-player" loop>
-    <source src="https://eta.vgmtreasurechest.com/soundtracks/minecraft-classic-soundtrack-gamerip-2013/hxrlzyhnqz/01.%20Calm%201.mp3" type="audio/mpeg">
+
+  <audio id="audio-player" loop>
+    <source
+      src="https://eta.vgmtreasurechest.com/soundtracks/minecraft-classic-soundtrack-gamerip-2013/hxrlzyhnqz/01.%20Calm%201.mp3"
+      type="audio/mpeg">
     Votre navigateur ne supporte pas l'élément audio.
   </audio>
 </head>
 
 <body class="lightmode" id="body">
 
-  <button type="button" class = "dark-mode" id="dark-mode">
-    Dark mode
-  </button>
- 
+
+
   <div class=" left-container">
+
+    <button type="button" class = "dark-mode" id="dark-mode">
+      Dark mode
+    </button>
+
     
+
 
     <form id="upload-form" class="upload-container" enctype="multipart/form-data">
 
@@ -30,7 +37,7 @@
 
     </form>
 
-    <div class="container">
+    <div class="menu-container">
       <select class="menu-depliant" id="menu-depliant">
         <option value="">Voir les anciens documents</option>
         <option value="1">Document 1</option>
@@ -39,8 +46,14 @@
         <option value="4">Document 4</option>
         <option value="5">Document 5</option>
       </select>
-      <button class="charger-doc" id="charger-doc">Traiter Option Sélectionnée</button>
-      <div class="upload-status" id="upload-status"></div>
+      <button class="charger-doc" id="charger-doc">Charger Document</button>
+      <!--<div class="upload-status" id="upload-status"></div>-->
+    </div>
+
+    <div class="dark-container">
+      <button type="button" id="dark-mode" ,class="dark-mode">
+        Dark mode
+      </button>
     </div>
 
   </div>
@@ -79,5 +92,3 @@
 
 
 </html>
-
-
