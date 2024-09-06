@@ -115,7 +115,7 @@ def rotation(i):
 
 @app.route("/reset", methods=["POST"])
 def reset():
-    print("bbbbbbbbbbbbb")
+    # print("bbbbbbbbbbbbb")
     ask_question_to_pdf.content_downloads = ask_question_to_pdf.vider_downloads()
     ask_question_to_pdf.num_doc = 1
     return "ok"

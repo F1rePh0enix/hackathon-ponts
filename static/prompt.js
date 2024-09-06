@@ -37,6 +37,7 @@ const appendAIMessage = async (messagePromise) => {
 
 const handlePrompt = async (event) => {
   audio.play()
+  uploadStatus.innerText = '';
   event.preventDefault();
   // Parse form data in a structured object
   const data = new FormData(event.target);
@@ -67,6 +68,7 @@ promptForm.addEventListener("submit", handlePrompt);
 
 const handleQuestionClick = async (event) => {
   audio.play()
+  uploadStatus.innerText = '';
   appendAIMessage(async () => {
     const response = await fetch("/question", {
       method: "GET",
@@ -86,6 +88,7 @@ questionButton.addEventListener("click", handleQuestionClick);
 
 const HandleDarkModeClick = async (event) => {
   audio.play()
+  uploadStatus.innerText = '';
   console.log('DM button pressed');
   let url = "/dark";
   if (bodyTheme.classList.contains("lightmode")) {
@@ -103,6 +106,7 @@ DMButton.addEventListener("click", HandleDarkModeClick);
 
 const HandleResetClick = async (event) => {
   audio.play()
+  uploadStatus.innerText = '';
   console.log('reset button pressed');
   try {
     const response = await fetch("/reset", {
@@ -123,6 +127,7 @@ const HandleResetClick = async (event) => {
 resetButton.addEventListener("click", HandleResetClick);
 
 uploadForm.addEventListener('submit', async (event) => {
+  uploadStatus.innerText = '';
   audio.play()
   event.preventDefault();
 
@@ -159,6 +164,7 @@ uploadForm.addEventListener('submit', async (event) => {
 
 const handleChargerClick = async (event) => {
   audio.play()
+  uploadStatus.innerText = '';
   // Élément sélectionné
   var selectElement = document.getElementById('menu-depliant');
 

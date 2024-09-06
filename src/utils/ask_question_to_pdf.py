@@ -172,7 +172,7 @@ def suppr_download(filename):
 
 
 def vider_downloads():
-    print("aaaaaaaaaaaaaaaaaaaaaa")
+    # print("aaaaaaaaaaaaaaaaaaaaaa")
     for filename in os.listdir("downloads"):
         length_name = len(filename)
         if filename[(length_name - 4) :] in [".pdf", ".txt", "docx"]:

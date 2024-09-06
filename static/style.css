@@ -111,6 +111,7 @@ body {
 .upload-status {
   position: fixed;
   top: 60%;
+  left: 10px;
   margin-top: 10px;
   color: rgb(33, 20, 64);
 }
@@ -258,6 +259,7 @@ body {
   display: none;
 }
 
+
 /* Loader code taken from https://loading.io/css/ */
 .loader {
   display: inline-block;
@@ -272,7 +274,7 @@ body {
   width: var(--loader-bullet-size);
   height: var(--loader-bullet-size);
   border-radius: 50%;
-  background-color: var(--main-color);
+  background-color: var(--border-col);
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 
