@@ -1,15 +1,10 @@
 :root {
-  --body-background-color: #cecece;
-  --main-background-color: #ffffff;
-  --main-color: #311937;
   --max-body-width: 700px;
-  --border-color: #8418ab;
-  --secondary-color: #f4f4f4;
   --loader-bullet-size: 6px;
 }
 
 .darkmode {
-  --body-background-col: #2e2e2e;
+  --body-background-col: #001941;
   --main-background-col: #000000;
   --left-background-col: #241548;
   --main-col: #c4d5d4;
@@ -19,7 +14,7 @@
 }
 
 .lightmode {
-  --body-background-col: #cecece;
+  --body-background-col: #ffd99b;
   --main-background-col: #ffffff;
   --left-background-col: #3d3d3d;
   --main-col: #311937;
