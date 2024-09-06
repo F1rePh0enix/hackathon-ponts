@@ -87,15 +87,15 @@ def read_doc(filename):
     length_name = len(filename)
     if filename[(length_name - 3) :] == "pdf":
         document = read_pdf(filename)
-        print("pdf")
+        # print("pdf")
 
     elif filename[(length_name - 3) :] == "txt":
         document = read_txt(filename)
-        print("txt")
+        # print("txt")
 
     else:
         document = read_docx(filename)
-        print("docx")
+        # print("docx")
 
     return document
 
@@ -125,7 +125,7 @@ def gpt3_completion(ppt, doc=document, chatlog=[]):
     # bouton "je vais transmettre un document : modifier message sysyème (doc)
     # en appuyant sur un bouton, on modifie les paramètres du fichier css
     # les boutons sont à déclarer dans html
-    print(response)
+    # print(response)
     return response.choices[0].message.content
 
 
@@ -161,3 +161,37 @@ def gpt3_correct(ppt, doc=document, chatlog=[]):
         {"role": "assistant", "content": response.choices[0].message.content}
     )
     return response.choices[0].message.content
+
+
+def suppr_download(filename):
+    os.remove("downloads/" + filename)
+
+
+def vider_downloads():
+    for filename in os.listdir("downloads"):
+        length_name = len(filename)
+        if filename[(length_name - 3) :] in ["pdf", "txt", "docx"]:
+            suppr_download(filename)
+
+    return ["", "", "", "", ""]
+
+
+def add_downloads(filename):
+    content = os.listdir("downloads")
+    content.remove("image.jpg")
+    while len(content_downloads) < 5:
+        content.append("")
+    a_suppr = content.pop(4)
+    if a_suppr != "":
+        suppr_download(a_suppr)
+    content.append(filename)
+
+    return content
+
+
+content_downloads = os.listdir("downloads")
+content_downloads.remove("image.jpg")
+while len(content_downloads) < 5:
+    content_downloads.append("")
+
+print(content_downloads)

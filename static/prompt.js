@@ -4,6 +4,7 @@ const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
 const uploadForm = document.getElementById('upload-form');
 const uploadStatus = document.getElementById('upload-status');
+const chargerDoc = document.getElementById('charger-doc')
 const bodyTheme = document.getElementById('body');
 const DMButton = document.getElementById('dark-mode');
 const audio = document.getElementById('audio-player');
@@ -118,6 +119,7 @@ uploadForm.addEventListener('submit', async (event) => {
       });
 
       if (response.ok) {
+
         uploadStatus.innerText = 'Fichier téléchargé avec succès !';
       } else {
         uploadStatus.innerText = 'Échec du téléchargement du fichier.';
@@ -129,6 +131,45 @@ uploadForm.addEventListener('submit', async (event) => {
     uploadStatus.innerText = 'Veuillez sélectionner un fichier PDF, TXT ou DOCX.';
   }
 });
+
+
+const handleChargerClick = async (event) => {
+  audio.play()
+  // Élément sélectionné
+  var selectElement = document.getElementById('menu-depliant');
+
+  // Récupérer l'option sélectionnée
+  var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+  // Récupérer la valeur de l'option sélectionnée
+  var selectedValue = selectedOption.value;
+
+  // Vérifier si une option a été sélectionnée
+  if (selectedValue === "") {
+    document.getElementById('upload-status').innerText = 'Veuillez sélectionner une option.';
+    return;
+  }
+
+  try {
+    const response = await fetch('/charger', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ document: selectedValue })
+    });
+
+    if (response.ok) {
+      document.getElementById('upload-status').innerText = 'Fichier téléchargé avec succès !';
+    } else {
+      document.getElementById('upload-status').innerText = 'Échec du téléchargement du fichier.';
+    }
+  } catch (error) {
+    document.getElementById('upload-status').innerText = 'Une erreur est survenue lors du téléchargement.';
+  }
+};
+
+document.getElementById('charger-doc').addEventListener('click', handleChargerClick);
 
 
 audio.play();
