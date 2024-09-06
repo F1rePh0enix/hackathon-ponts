@@ -5,12 +5,18 @@
   <title>Ma page</title>
 
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+
+  <audio id="audio-player" loop>
+    <source src="https://eta.vgmtreasurechest.com/soundtracks/minecraft-classic-soundtrack-gamerip-2013/hxrlzyhnqz/01.%20Calm%201.mp3" type="audio/mpeg">
+    Votre navigateur ne supporte pas l'élément audio.
+  </audio>
 </head>
 
-<body>
+<body class="lightmode" id="body">
 
+ 
   <div class=" left-container">
-    <button type="checkbox" class="checkbox" id="dark-mode">
+    <button type="button" id="dark-mode">
       Dark mode
     </button>
 
@@ -41,7 +47,7 @@
 
   <main class="main-container">
     <header class="header">
-      <h1 class="header-title">Mon A.I.de mémoire</h1>
+      <h1 class="header-title">I.A.bracadabra</h1>
     </header>
 
     <section id="messages-container" class="messages-container">
@@ -73,4 +79,4 @@
 
 </html>
 
-<!-- balise audio html pour mettre le son-->
+

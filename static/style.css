@@ -8,12 +8,20 @@
   --loader-bullet-size: 6px;
 }
 
-.checkbox {
-  --body-background-color: #07090a;
-  --main-background-color: #000000;
-  --main-color: #c4d5d4;
-  --border-color: #000000;
-  --secondary-color: #000000;
+.darkmode {
+  --body-background-col: #2e2e2e;
+  --main-background-col: #000000;
+  --main-col: #c4d5d4;
+  --border-col: #00fff7;
+  --secondary-col: #000000;
+}
+
+.lightmode {
+  --body-background-col: #cecece;
+  --main-background-col: #ffffff;
+  --main-col: #311937;
+  --border-col: #8418ab;
+  --secondary-col: #f4f4f4;
 }
 
 * {
@@ -21,7 +29,7 @@
 }
 
 body {
-  background-color: var(--body-background-color);
+  background-color: var(--body-background-col);
   padding: 0;
   margin: 0;
   font-family: sans-serif;
@@ -108,8 +116,8 @@ body {
 .main-container {
   max-width: var(--max-body-width);
   min-height: 100vh;
-  background-color: var(--main-background-color);
-  color: var(--main-color);
+  background-color: var(--main-background-col);
+  color: var(--main-col);
   padding: 50px;
   margin: 0 auto;
 }
@@ -130,15 +138,47 @@ body {
 }
 
 .message {
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-col);
   border-radius: 5px;
   padding: 10px 15px;
 }
 
-.message-human {
-  background-color: var(--secondary-color);
+
+.dark-mode {
+  position: fixed;
+  border: 1px solid var(--border-col);
+  background-color: var(--secondary-col);
+  color: var(--main-color);
 }
 
+.audio-player{
+  position: fixed;
+  bottom: 0px;
+  right: 25px;
+  border: 1px solid var(--border-col);
+}
+
+.message-human {
+  background-color: var(--secondary-col);
+}
+
+
+.upload-container {
+  position: fixed;
+  top: 20px;
+  border: 1px solid var(--border-col);
+  background-color: var(--main-background-col);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.upload-input {
+  flex-grow: 1;
+  border: 1px solid var(--border-col);
+  border-radius: 5px;
+  padding: 5px;
+}
 
 .prompt-container {
   position: fixed;
@@ -149,9 +189,9 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: var(--main-background-color);
+  background-color: var(--main-background-col);
   padding: 20px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-col);
 }
 
 .prompt-label {
@@ -160,21 +200,22 @@ body {
 
 .prompt-input {
   flex-grow: 1;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-col);
   border-radius: 5px;
   padding: 5px;
 }
 
 .button {
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-col);
   padding: 5px;
   border-radius: 5px;
-  background-color: var(--main-background-color);
+  background-color: var(--main-background-col);
+  color: var(--main-col);
 }
 
 .button:hover,
 .button:active {
-  background-color: var(--body-background-color);
+  background-color: var(--body-background-col);
   cursor: pointer;
 }
 
